@@ -28,11 +28,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public int insert(User user) {
         user.setId(IdGen.uuid());
+        user.setCreateTime(System.currentTimeMillis());
+        user.setUpdateTime(System.currentTimeMillis());
         return userDao.insert(user);
     }
 
     @Override
     public int update(User user) {
+        user.setUpdateTime(System.currentTimeMillis());
         return userDao.update(user);
     }
 
@@ -54,6 +57,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public Pager<User> selectPager(Pager pager){
         return userDao.selectPager(pager);
+    }
+
+    public User selectByUsername(String username){
+        JSONObject param = new JSONObject();
+        param.put("username", username);
+        List<User> userList = userDao.selectAll(param);
+        if(userList.size() == 1){
+            return userList.get(0);
+        }
+        return null;
     }
 
 }

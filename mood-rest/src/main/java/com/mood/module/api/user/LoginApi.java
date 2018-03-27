@@ -2,6 +2,9 @@ package com.mood.module.api.user;
 
 import com.mood.base.BaseController;
 import com.mood.common.HttpCode;
+import com.mood.redis.CacheService;
+import com.mood.user.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +28,11 @@ public class LoginApi extends BaseController {
 //    @Autowired
 //    MessageCloudService messageCloudService = null;
 
+    @Autowired
+    private CacheService cacheService;
 
+    @Autowired
+    private UserService userService;
 
     @PostMapping("/login")
     public Object accessToken(@RequestParam(value = "username", defaultValue = "")String username,
@@ -36,7 +43,7 @@ public class LoginApi extends BaseController {
         //验证是否已经登录
 
         //验证用户是否存在
-
+        userService.selectByUsername(username);
         //验证密码是否正确
 
         //

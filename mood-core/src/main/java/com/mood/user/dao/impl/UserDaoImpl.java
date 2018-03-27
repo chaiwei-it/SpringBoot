@@ -54,10 +54,6 @@ public class UserDaoImpl implements UserDao {
             if (userName != null) {
                 criteria.andEqualTo("userName", userName.toString());
             }
-//            String userName = param.get("userName").toString();
-//            if (userName != null) {
-//                criteria.andEqualTo("userName", userName);
-//            }
         }
         example.setOrderByClause("id asc");
         return userMapper.selectByExample(example);

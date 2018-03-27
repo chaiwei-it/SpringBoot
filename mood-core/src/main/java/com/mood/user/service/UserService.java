@@ -10,6 +10,8 @@ import com.mood.entity.user.User;
  */
 public interface UserService extends BaseService<User> {
 
+    public User selectByUsername(String username);
+
 //    public int insert(User user);
 //
 //    public int update(User user);
